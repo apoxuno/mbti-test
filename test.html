@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 15px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MBTI Test</h1>
+        <form id="mbtiForm">
+            <!-- Add questions here -->
+            <label>
+                1. Do you prefer to work in a team?
+                <select name="E_I_1">
+                    <option value="E">Yes</option>
+                    <option value="I">No</option>
+                </select>
+            </label>
+            <label>
+                2. Do you focus on details rather than big picture?
+                <select name="S_N_1">
+                    <option value="S">Yes</option>
+                    <option value="N">No</option>
+                </select>
+            </label>
+            <label>
+                3. Do you make decisions based on logic rather than emotions?
+                <select name="T_F_1">
+                    <option value="T">Yes</option>
+                    <option value="F">No</option>
+                </select>
+            </label>
+            <label>
+                4. Do you prefer planned events over spontaneous ones?
+                <select name="J_P_1">
+                    <option value="J">Yes</option>
+                    <option value="P">No</option>
+                </select>
+            </label>
+            <!-- Add more questions as needed -->
+            <button type="submit">Get Results</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('mbtiForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const result = {
+                E: 0,
+                I: 0,
+                S: 0,
+                N: 0,
+                T: 0,
+                F: 0,
+                J: 0,
+                P: 0
+            };
+            for (let [key, value] of formData.entries()) {
+                result[value]++;
+            }
+            const mbtiType = `${result.E >= result.I ? 'E' : 'I'}${result.S >= result.N ? 'S' : 'N'}${result.T >= result.F ? 'T' : 'F'}${result.J >= result.P ? 'J' : 'P'}`;
+            window.location.href = `results.html?type=${mbtiType}`;
+        });
+    </script>
+</body>
+</html>
